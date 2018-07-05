@@ -24,16 +24,9 @@ sel= Selector(text= driver.page_source)
 url = sel.xpath('//h2[@class="entry-title"]//a/@href').extract_first()
 
 hack_data = {
-'Image':"N/A",
+
 'Title of event': title,
-'Date': "N/A",
-'Time': "N/A",
 'Location': "Online",
-'GPS': "N/A",
-'Event Description': "N/A",
-'Prizes': "N/A",
-'Schedule': "N/A",
-'Sponsor': "N/A",
 'Event URL': url,
 }
 
