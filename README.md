@@ -24,6 +24,8 @@ Used Dependencies (All latest versions):
 
 6. Pandas
 
+7. Geopy
+
 API's used (Python SDK):
 
 1. meetup.api
