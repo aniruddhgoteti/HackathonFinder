@@ -51,10 +51,7 @@ class HackSpider(CrawlSpider):
 		'Location':location,
 		'GPS':GPS,
 		'Event Description':print("N/A"),
-		'Prizes':print("N/A"),
-		'Schedule':print("N/A"),
-		'Sponsor':print("N/A"),
-		"Event URL":event_URL }
+		'Event URL':event_URL }
 
 
 

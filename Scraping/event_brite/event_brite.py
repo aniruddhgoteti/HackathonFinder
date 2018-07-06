@@ -10,25 +10,6 @@ from geopy.geocoders import Nominatim
 
 geolocator = Nominatim()
 
-"""hack_data = { 
-'Image':"N/A",
-
-'Title of event': title,
-
-'Date': "N/A",
-'Time': "N/A",
-'Location': "Online",
-'GPS': "N/A",
-'Event Description': "N/A",
-'Prizes': "N/A",
-'Schedule': "N/A",
-'Sponsor': "N/A",
-'Event URL': "null",
-}
-
-result= hack.insert(hack_data)"""
-
-
 
 Client= MongoClient('localhost', 27017)
 db= Client["hackathons"]
@@ -127,14 +108,15 @@ for x in range(len(loc)):
 
 des= []
 for each in my_dict["events"]:
-	des.append(each["description"]["text"])
+	des.append(each["description"]["html"])
 
 #print(des)	
 
 
 
 db_data= pd.DataFrame(
-    {'Title of event': title,
+    {'Image': null,
+     'Title of event': title,
      'Date': date,
      'Time': time,
      'Location': loc,
