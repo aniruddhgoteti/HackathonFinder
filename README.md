@@ -10,6 +10,10 @@ Scraped Websites (Till now)
 
 4. https://hackevents.co
 
+5. http://hackathonsnear.me
+
+6. http://www.hackalist.org
+
 Used Dependencies (All latest versions):
 
 1. Selenium
