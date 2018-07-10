@@ -18,9 +18,15 @@ from sqlalchemy import create_engine
 from json import dumps
 from folium import IFrame
 import base64
-
+import os
 from threading import *
 import copy
+from time import sleep
+import time
+import threading
+
+#Scraping every 48 hours
+
 
 class Future:
 
@@ -78,7 +84,7 @@ api = Api(app)
 
 mongo=PyMongo(app)
 
-@app.route('/list')
+@app.route('/')
 def getList():
 	
 	list=mongo.db.hack_finder
@@ -86,14 +92,16 @@ def getList():
 	result= []
 
 	for j in list_find:
-		result.append({'Title of event': j['Title of event'],
-    	# 'Date': j['Date'],
-    	# 'Time': j['Time'],
-     	'Location': j['Location'],
-     	'GPS': j['GPS'],
-    	# 'Event Description': j['Event Description'],
-     	'Event URL': j['Event URL']})
-
+		try:
+			result.append({'Title of event': j['Title of event'],
+    		# 'Date': j['Date'],
+    		# 'Time': j['Time'],
+     		'Location': j['Location'],
+     		'GPS': j['GPS'],
+    		# 'Event Description': j['Event Description'],
+     		'Event URL': j['Event URL']})
+		except KeyError:
+			pass	
 	return jsonify(result)	
 
 
@@ -108,13 +116,18 @@ def getmap():
 		null= None
 
 		for j in list_find:
-			result.append({'Title of event': j['Title of event'],
-    		# 'Date': j['Date'],
-    		# 'Time': j['Time'],
-     		'Location': j['Location'],
-     		'GPS': j['GPS'],
-    		# 'Event Description': j['Event Description'],
-     		'Event URL': j['Event URL']})
+			try:
+				result.append({'Title of event': j['Title of event'],
+    			# 'Date': j['Date'],
+    			# 'Time': j['Time'],
+     			'Location': j['Location'],
+
+	     		'GPS': j['GPS'],
+    			# 'Event Description': j['Event Description'],
+     			'Event URL': j['Event URL']})
+			except KeyError:
+				pass	
+
 	
 	
 		for x in range(len(result)):
@@ -198,7 +211,7 @@ def getfeed():
 
 	
 
-
+#uncomment to use it as an API
 
 #api.add_resource(HackathonList, '/list') # Route_1
 #api.add_resource(Map, '/map') # Route_2
@@ -207,3 +220,9 @@ def getfeed():
 if __name__=='__main__':
 	
 	app.run(debug=True)
+
+starttime=time.time()
+while True:
+	
+	os.system (r"python C:\Users\aniru\OneDrive\Documents\GitHub\HackathonFinder\Scraping\runscript.py")
+	time.sleep(172800.0 - ((time.time() - starttime) % 172800.0))

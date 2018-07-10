@@ -53,6 +53,7 @@ start_time=[]
 start_date=[]
 end_time= []
 end_date= []
+null = None
 
 for x in end_time_date:
 	end_date.append(x[0:10])
