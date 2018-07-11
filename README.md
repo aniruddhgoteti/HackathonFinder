@@ -13,7 +13,7 @@ Make sure have MongoDB names as:
 Database: hackathons
 Collection: hack_finder
 
-
+Please make sure to change the paths of python scripts in the runscript.py file
 
 Scraped Websites (Till now)
 
