@@ -25,7 +25,7 @@ from time import sleep
 import time
 import threading
 
-#Scraping every 48 hours
+
 
 
 class Future:
@@ -221,6 +221,7 @@ if __name__=='__main__':
 	
 	app.run(debug=True)
 
+#Scraping every 48 hours
 starttime=time.time()
 while True:
 	
