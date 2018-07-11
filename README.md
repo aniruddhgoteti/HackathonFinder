@@ -1,4 +1,19 @@
-# HackathonFinder
+# HackathonFinderAPI
+
+In order to run the finder,
+
+Execute: python list_view.py
+
+And, Follow the comments in list_view.py to convert it into an API and integrate to wordpress website. Make sure that the wordpress website has a JSON viewer plugin.
+
+Added: Scrapes websites every 48 hours, live feed
+
+Make sure have MongoDB names as:
+
+Database: hackathons
+Collection: hack_finder
+
+
 
 Scraped Websites (Till now)
 
@@ -28,7 +43,7 @@ Used Dependencies (All latest versions):
 
 6. Pandas
 
-7. Geopy
+
 
 API's used (Python SDK):
 
