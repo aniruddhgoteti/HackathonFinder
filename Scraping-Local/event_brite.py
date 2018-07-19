@@ -13,7 +13,7 @@ from geopy.geocoders import Nominatim
 geolocator = Nominatim()
 
 
-Client = MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
+Client = MongoClient('"""')
 
 db= Client["events"]
 hack= db.hackathons
