@@ -7,6 +7,9 @@ from collections import OrderedDict
 import pandas as pd
 import json
 from itertools import repeat
+import datetime
+from datetime import datetime
+from datetime import timezone
 
 from geopy.geocoders import Nominatim
 
@@ -25,8 +28,9 @@ sleep(4)
 title_ = []
 dates_= []
 loc_= []
-gps_ = []
-url_=[]
+gps_lat = []
+gps_long= []
+url_= []
 null = None
 
 title= driver.find_elements_by_xpath('//a[@class="hackathon-name ng-binding"]')
@@ -54,9 +58,15 @@ for x in range(len(location)):
 	
 for x in range(len(loc_)):
 	try:
-		gps_.append(str(geolocator.geocode(loc_[x]).latitude)+ "," + str(geolocator.geocode(loc_[x]).longitude))
+		gps_lat.append(str(geolocator.geocode(loc_[x]).latitude))
 	except AttributeError:
-		gps_.append(null)
+		gps_lat.append(null)
+
+for x in range(len(loc_)):
+	try:
+		gps_long.append(str(geolocator.geocode(loc_[x]).longitude))
+	except AttributeError:
+		gps_long.append(null)		
 	
 
 title_ = list(OrderedDict.fromkeys(title_))
@@ -72,12 +82,12 @@ dates_ = list(OrderedDict.fromkeys(dates_))
 
 
 db_data= pd.DataFrame(
-    {'Image': null,
+    {'Image': "https://www.google.se/imgres?imgurl=http%3A%2F%2Fco-station.com%2Fwp-content%2Fuploads%2F2017%2F05%2Fhackathon-graphic.png&imgrefurl=http%3A%2F%2Fco-station.com%2F2017%2F05%2F02%2F5-reasons-join-hackathon%2F&docid=ShALBLAg56sXnM&tbnid=Ej3Flrbkew4bQM%3A&vet=10ahUKEwjuwL6qwKbcAhUCYZoKHRBLCS8QMwjcASgGMAY..i&w=700&h=300&bih=947&biw=1920&q=hackathon&ved=0ahUKEwjuwL6qwKbcAhUCYZoKHRBLCS8QMwjcASgGMAY&iact=mrc&uact=8",
      'Title of event': title_,
-     'Date': dates_,
-     'Time': null,
+     'timestamp': dates_,
      'Location': loc_,
-     'GPS': gps_,
+     'GPS_lat': gps_lat,
+     'GPS_long': gps_long,
      'Event Description': null,
      'Event URL': url_
     })

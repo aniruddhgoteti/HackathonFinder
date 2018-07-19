@@ -26,7 +26,7 @@ import time
 import threading
 
 
-
+#for multithreading the feeds
 
 class Future:
 
@@ -68,7 +68,7 @@ class Future:
         self.__C.release()
 
 
-
+#connection with MongoDB
 
 Client= MongoClient('localhost', 27017)
 db= Client["hackathons"]
@@ -80,11 +80,13 @@ app= Flask(__name__)
 app.config['MONGO_DBNAME'] = 'hackathons'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/hackathons'
 
+
+#Converting flask app to API
 api = Api(app)
 
 mongo=PyMongo(app)
 
-@app.route('/')
+@app.route('/' , methods= ['GET'])
 def getList():
 	
 	list=mongo.db.hack_finder
@@ -105,7 +107,7 @@ def getList():
 	return jsonify(result)	
 
 
-@app.route('/map')
+@app.route('/map', methods= ['GET'])
 def getmap():
 	with app.app_context():
 		global hackmap
@@ -118,12 +120,12 @@ def getmap():
 		for j in list_find:
 			try:
 				result.append({'Title of event': j['Title of event'],
-    			# 'Date': j['Date'],
-    			# 'Time': j['Time'],
+    			'Date': j['Date'],
+    			'Time': j['Time'],
      			'Location': j['Location'],
 
 	     		'GPS': j['GPS'],
-    			# 'Event Description': j['Event Description'],
+    			'Event Description': j['Event Description'],
      			'Event URL': j['Event URL']})
 			except KeyError:
 				pass	
@@ -194,7 +196,7 @@ def getmap():
 		#return app.send_static_file('newmap.html')
   #Labels[point], parse_html=True,
 
-@app.route('/feed')
+@app.route('/feed',  methods= ['GET'])
 def getfeed():
 	hit_list = [ "https://devpost.com/hackathons.rss", "https://disruptorshandbook.com/feed", "https://startup-calendar.com/hackathons/feed/", "https://www.meetup.com/events/rss/191381583/35ae41e956b41b34348dc8a1ff030c6947d7bc13/going" ] # list of feeds to pull down
 
@@ -209,13 +211,6 @@ def getfeed():
 
 	return jsonify(entries)	
 
-	
-
-#uncomment to use it as an API
-
-#api.add_resource(HackathonList, '/list') # Route_1
-#api.add_resource(Map, '/map') # Route_2
-#api.add_resource(Feed, '/feed') # Route_3
 
 if __name__=='__main__':
 	
