@@ -8,12 +8,14 @@ import datetime
 from datetime import datetime
 from datetime import timezone
 from operator import add
-from geopy.geocoders import Nominatim
+from geopy.geocoders import GoogleV3
 
-geolocator = Nominatim()
+key= "AIzaSyA2D21h4aDEhPFklK3xKtQDMjkzMoyoxV4"
+
+geolocator = GoogleV3(api_key=key,user_agent="my-application", timeout=10)
 
 
-Client = MongoClient('"""')
+Client = MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
 
 db= Client["events"]
 hack= db.hackathons
@@ -81,7 +83,8 @@ loc=[]
 for each in my_dict["events"]:
 		loc.append(each["start"]["timezone"])
 
-#print(loc)	
+print(loc)	
+
 
 gps_lat= []
 for x in range(len(loc)):
@@ -96,6 +99,8 @@ for x in range(len(loc)):
 	if loc[x]=="America/Sao_Paulo":
 		loc[x]= "America"
 	gps_long.append(str(geolocator.geocode(loc[x]).longitude))
+
+
 
 
 des= []

@@ -13,7 +13,7 @@ client = meetup.api.Client('5949b2d4d6f7c7b2c136d86e243479')
 Clt = MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
 
 db= Clt["events"]
-hack= db.hackathons
+hack= db.test
 
 info= client.GetOpenEvents({'text':'hackathon'})
 

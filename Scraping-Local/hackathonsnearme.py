@@ -10,15 +10,17 @@ from itertools import repeat
 import datetime
 from datetime import datetime
 from datetime import timezone
+from time import time
+from geopy.geocoders import GoogleV3
 
-from geopy.geocoders import Nominatim
+key= "AIzaSyA2D21h4aDEhPFklK3xKtQDMjkzMoyoxV4"
+geolocator = GoogleV3(api_key=key, timeout=10)
 
-geolocator = Nominatim()
 
-Client= MongoClient('localhost', 27017)
-db= Client["hackathons"]
+Client= MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
+db= Client["events"]
+hack= db.hackathons
 
-hack= db.hack_finder
 
 
 driver = webdriver.Chrome()
@@ -60,35 +62,50 @@ for x in range(len(location)):
 for x in range(len(loc_)):
 	try:
 		gps_lat.append(str(geolocator.geocode(loc_[x]).latitude))
+	
 	except AttributeError:
 		gps_lat.append(null)
 
 for x in range(len(loc_)):
 	try:
 		gps_long.append(str(geolocator.geocode(loc_[x]).longitude))
+		
 	except AttributeError:
-		gps_long.append(null)		
+		gps_long.append(null)	
 	
 
 title_ = list(OrderedDict.fromkeys(title_))
 #list(set(title_))	
+start_time_date=[]
+unix_start= []
 
 dates_ = list(OrderedDict.fromkeys(dates_))
-
-dt = datetime.strptime(start_time_date[x], '%Y-%m-%dT%XZ')
+for x in range(len(dates_)):
+	try:
+		start_time_date.append(dates_[x].split('-')[0].strip() + " 2018")
+		dt = datetime.strptime(start_time_date[x], '%b %d %Y')
+		timestamp = dt.replace(tzinfo=timezone.utc).timestamp()
+		unix_start.append(timestamp)
+	except ValueError:
+		unix_start.append(null)
+		
+#dt = datetime.strptime(start_time_date[x], '%Y-%m-%dT%XZ')
 
 #list(set(dates_))
-		
+timestamp=[]
 
-#print(len(title_), len(dates_), len(loc_), len(gps_), len(url_))
-#print(url_)
-#print(title_)
+for x in range(len(unix_start)):
+	timestamp.append(str(unix_start[x]) + "," + str(unix_start[x]))		
 
+print(len(title_), len(dates_), len(loc_),  len(url_))
+print(url_)
+print(title_)
+print(timestamp)
 
 db_data= pd.DataFrame(
     {'Image': "https://www.google.se/imgres?imgurl=http%3A%2F%2Fco-station.com%2Fwp-content%2Fuploads%2F2017%2F05%2Fhackathon-graphic.png&imgrefurl=http%3A%2F%2Fco-station.com%2F2017%2F05%2F02%2F5-reasons-join-hackathon%2F&docid=ShALBLAg56sXnM&tbnid=Ej3Flrbkew4bQM%3A&vet=10ahUKEwjuwL6qwKbcAhUCYZoKHRBLCS8QMwjcASgGMAY..i&w=700&h=300&bih=947&biw=1920&q=hackathon&ved=0ahUKEwjuwL6qwKbcAhUCYZoKHRBLCS8QMwjcASgGMAY&iact=mrc&uact=8",
      'Title of event': title_,
-     'timestamp': dates_,
+     'timestamp': timestamp,
      'Location': loc_,
      'GPS_lat': gps_lat,
      'GPS_long': gps_long,

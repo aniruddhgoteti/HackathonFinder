@@ -68,10 +68,9 @@ ITEM_PIPELINES = {
     'hackevents.pipelines.MongoDBPipeline': 300,
 }
 
-MONGODB_SERVER = 'localhost'
-MONGODB_PORT = 27017
-MONGODB_DB = 'hackathons'
-MONGODB_COLLECTION = 'hack_finder'
+MONGODB_SERVER = 'mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net -u events -p 0mY17NHpxeqb48ht'
+MONGODB_DB = 'event'
+MONGODB_COLLECTION = 'test'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

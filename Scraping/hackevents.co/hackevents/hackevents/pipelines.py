@@ -13,8 +13,7 @@ class MongoDBPipeline(object):
 
 	def __init__(self):
 		connection = MongoClient(
-			settings['MONGODB_SERVER'],
-			settings['MONGODB_PORT'])
+			settings['MONGODB_SERVER'])
 		db = connection[settings['MONGODB_DB']]
 		self.collection= db[settings['MONGODB_COLLECTION']]
 
