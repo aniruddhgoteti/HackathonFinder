@@ -13,11 +13,11 @@ from datetime import timezone
 from time import time
 from geopy.geocoders import GoogleV3
 
-key= "AIzaSyA2D21h4aDEhPFklK3xKtQDMjkzMoyoxV4"
+key= ""
 geolocator = GoogleV3(api_key=key, timeout=10)
 
 
-Client= MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
+Client= MongoClient('')
 db= Client["events"]
 hack= db.hackathons
 
