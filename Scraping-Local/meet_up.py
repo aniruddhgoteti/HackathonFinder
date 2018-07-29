@@ -7,10 +7,10 @@ import datetime
 from datetime import datetime
 from datetime import timezone
 
-client = meetup.api.Client('5949b2d4d6f7c7b2c136d86e243479')
+client = meetup.api.Client('')
 
 
-Clt = MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
+Clt = MongoClient('')
 
 db= Clt["events"]
 hack= db.test
