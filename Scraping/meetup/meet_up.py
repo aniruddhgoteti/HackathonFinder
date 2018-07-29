@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import csv
 import pandas as pd
 
-client = meetup.api.Client('5949b2d4d6f7c7b2c136d86e243479')
+client = meetup.api.Client('')
 
 
 Clt= MongoClient('localhost', 27017)
