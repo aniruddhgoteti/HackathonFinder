@@ -21,7 +21,7 @@ db= Client["events"]
 hack= db.hackathons
 
 
-eventbrite = Eventbrite('XKPWE63CH4NCOT6C7OAY') #PersonalAPI
+eventbrite = Eventbrite('') #PersonalAPI
 
 data= dict(q='hackathons')
 
