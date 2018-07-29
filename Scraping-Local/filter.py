@@ -2,7 +2,7 @@
 import pymongo
 
 
-client = pymongo.MongoClient('mongodb+srv://Events:0mY17NHpxeqb48ht@cluster0-fapdz.mongodb.net/main')
+client = pymongo.MongoClient(' ')
 db = client["events"]
 collection = db.test
 
