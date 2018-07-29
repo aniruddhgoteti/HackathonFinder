@@ -16,7 +16,7 @@ db= Client["hackathons"]
 hack= db.hack_finder
 
 
-eventbrite = Eventbrite('XKPWE63CH4NCOT6C7OAY')
+eventbrite = Eventbrite()
 
 data= dict(q='hackathons')
 
